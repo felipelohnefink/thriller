@@ -24,7 +24,12 @@ public class Shooting : MonoBehaviour {
 		}
 	}
 
-	void NoAmmo () {
+	void CannotShoot () {
 		canShoot = false;
 	}
+
+  void CanShoot() {
+    canShoot = true;
+  }
+
 }
