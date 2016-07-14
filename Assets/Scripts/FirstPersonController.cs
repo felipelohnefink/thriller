@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FirstPersonController : MonoBehaviour {
 
-	public float movementSpeed = 10.0f;
+    public float movementSpeed = 10.0f;
 	public float mouseSensitivity = 3.0f;
 	public float maxVerticalAngle = 60.0f;
 	public float jumpSpeed = 20.0f;
@@ -21,13 +21,13 @@ public class FirstPersonController : MonoBehaviour {
 	float remainingTime;
 	float noAmmoTime = 0; //Solves the Defeat Bug
 
-  public Text pointsText;
-  public Text timeText;
-  public Text bulletsText;
-  public GameObject gameOverMenu;
-  public GameObject crosshair;
+    public Text pointsText;
+    public Text timeText;
+    public Text bulletsText;
+    public GameObject gameOverMenu;
+    public GameObject crosshair;
 
-  private bool gameIsPaused;
+    private bool gameIsPaused;
 
 	Vector3 movement;
 
@@ -42,9 +42,9 @@ public class FirstPersonController : MonoBehaviour {
 
 		remainingTime = maxTime;
 
-    gameIsPaused = false;
+        gameIsPaused = false;
 		crosshair.GetComponent<MeshRenderer>().enabled = false;
-    gameOverMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -94,9 +94,9 @@ public class FirstPersonController : MonoBehaviour {
 
     //If there's no more bullets, the player cannot fire anymore
 		if ( bullets == 0 ) {
-      bulletsText.text = "Bullets: " + bullets;
+            bulletsText.text = "Bullets: " + bullets;
 			noAmmoTime += Time.deltaTime;
-      gameObject.SendMessage("CannotShoot");
+            gameObject.SendMessage("CannotShoot");
 		}
 
 		if ( Input.GetButtonDown("Fire2") ) {
@@ -108,15 +108,15 @@ public class FirstPersonController : MonoBehaviour {
 			gameObject.SendMessage("CannotShoot");
 			pointsText.text = "Points: " + currentPoints + "/" + maxPoints;
 			crosshair.GetComponent<MeshRenderer>().enabled = false;
-      GameOver();
+            GameOver();
 		}
 
 		//Player looses if runs out of time or bullets
 		if ( remainingTime <= 0 || noAmmoTime > 0.7f ) {
-      bulletsText.text = "Bullets: " + bullets;
+            bulletsText.text = "Bullets: " + bullets;
 			gameObject.SendMessage("CannotShoot");
 			crosshair.GetComponent<MeshRenderer>().enabled = false;
-      GameOver();
+            GameOver();
 		}
 	}
 
@@ -130,7 +130,7 @@ public class FirstPersonController : MonoBehaviour {
 
 	void MoreBullets () {
 		bullets += 3;
-    gameObject.SendMessage("CanShoot");
+        gameObject.SendMessage("CanShoot");
 		noAmmoTime = 0;
 	}
 

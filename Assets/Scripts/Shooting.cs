@@ -28,8 +28,8 @@ public class Shooting : MonoBehaviour {
 		canShoot = false;
 	}
 
-  void CanShoot() {
-    canShoot = true;
-  }
+    void CanShoot() {
+        canShoot = true;
+    }
 
 }
