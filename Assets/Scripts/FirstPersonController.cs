@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FirstPersonController : MonoBehaviour {
 
-    public float movementSpeed = 10.0f;
+  public float movementSpeed = 10.0f;
 	public float mouseSensitivity = 3.0f;
 	public float maxVerticalAngle = 60.0f;
 	public float jumpSpeed = 20.0f;
@@ -130,7 +130,7 @@ public class FirstPersonController : MonoBehaviour {
 
 	void MoreBullets () {
 		bullets += 3;
-        gameObject.SendMessage("CanShoot");
+    gameObject.SendMessage("CanShoot");
 		noAmmoTime = 0;
 	}
 
@@ -146,5 +146,9 @@ public class FirstPersonController : MonoBehaviour {
     Cursor.lockState = CursorLockMode.Locked;
     gameOverMenu.SetActive(false);
     gameObject.SendMessage("CanShoot");
+  }
+
+  public bool getGameIsPaused() {
+    return gameIsPaused;
   }
 }
