@@ -42,9 +42,9 @@ public class FirstPersonController : MonoBehaviour {
 
 		remainingTime = maxTime;
 
-        gameIsPaused = false;
+    gameIsPaused = false;
 		crosshair.GetComponent<MeshRenderer>().enabled = false;
-        gameOverMenu.SetActive(false);
+    gameOverMenu.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -135,10 +135,13 @@ public class FirstPersonController : MonoBehaviour {
 	}
 
   private void GameOver() {
+    
     Cursor.visible = true;
     Cursor.lockState = CursorLockMode.None;
     gameOverMenu.SetActive(true);
-    gameOverMenu.GetComponentInChildren<Text>().text = "Score: " + currentPoints + "/" + maxPoints;
+    if(gameIsPaused)
+      GameObject.Find("Game Over").GetComponent<Text>().text = "Paused";
+    GameObject.Find("Score").GetComponent<Text>().text = "Score: " + currentPoints + "/" + maxPoints;
   }
 
   public void Resume() {
