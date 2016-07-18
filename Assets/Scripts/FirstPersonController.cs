@@ -30,6 +30,8 @@ public class FirstPersonController : MonoBehaviour {
 
     private bool gameIsPaused;
   private bool stopTargets;
+  private AudioSource audio;
+  public AudioClip powerUpSound;
 
 	Vector3 movement;
 
@@ -99,10 +101,6 @@ public class FirstPersonController : MonoBehaviour {
             bulletsText.text = "Bullets: " + bullets;
 			noAmmoTime += Time.deltaTime;
             gameObject.SendMessage("CannotShoot");
-		}
-
-		if ( Input.GetButtonDown("Fire2") ) {
-			crosshair.GetComponent<MeshRenderer>().enabled = !crosshair.GetComponent<MeshRenderer>().enabled;
 		}
 
 		//Player wins if reaches the necessary points
@@ -200,7 +198,7 @@ public class FirstPersonController : MonoBehaviour {
 
   public void OnTriggerEnter(Collider c) {
     switch(c.tag) {
-      case "IncreaseTime": IncreaseTime(); Destroy(c.transform.parent.gameObject); break;
+      case "IncreaseTime": IncreaseTime(); PlaySoundAndDestroy(c); break;
       case "ActivateCrosshair": ActivateCrosshair(); Destroy(c.transform.parent.gameObject); break;
       case "StopTargets": StopTargets(); Destroy(c.transform.parent.gameObject); break;
       case "MoreAmmunition": MoreAmmunition(); Destroy(c.transform.parent.gameObject); break;
@@ -208,5 +206,10 @@ public class FirstPersonController : MonoBehaviour {
 
       default: break;
     }
+  }
+
+  public void PlaySoundAndDestroy(Collider c) {
+    gameObject.GetComponent<AudioSource>().PlayOneShot(powerUpSound);
+    Destroy(c.transform.parent.gameObject);
   }
 }

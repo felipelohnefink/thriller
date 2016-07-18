@@ -33,8 +33,10 @@ public class MoveTarget : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter ( Collision collision ) {
-		direction *= -1;
+	void OnCollisionEnter (Collision collision) {
+    if(!collision.gameObject.CompareTag("Player"))
+		  direction *= -1;
+    else
+      return;
 	}
-
 }

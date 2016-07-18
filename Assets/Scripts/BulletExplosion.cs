@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BulletExplosion : MonoBehaviour {
 	
-	float bulletLifeSpan = 5.0f;
+	float bulletLifeSpan = 3.0f;
 	public GameObject flameEffect;
 	GameObject player;
 
