@@ -28,6 +28,7 @@ public class FirstPersonController : MonoBehaviour {
     public GameObject crosshair;
 
     private bool gameIsPaused;
+  private bool stopTargets;
 
 	Vector3 movement;
 
@@ -113,10 +114,10 @@ public class FirstPersonController : MonoBehaviour {
 
 		//Player looses if runs out of time or bullets
 		if ( remainingTime <= 0 || noAmmoTime > 0.7f ) {
-            bulletsText.text = "Bullets: " + bullets;
+      bulletsText.text = "Bullets: " + bullets;
 			gameObject.SendMessage("CannotShoot");
 			crosshair.GetComponent<MeshRenderer>().enabled = false;
-            GameOver();
+      GameOver();
 		}
 	}
 
@@ -128,8 +129,8 @@ public class FirstPersonController : MonoBehaviour {
 		bullets -= 1;
 	}
 
-	void MoreBullets () {
-		bullets += 3;
+  void MoreBullets (int quantity) {
+		bullets += quantity;
     gameObject.SendMessage("CanShoot");
 		noAmmoTime = 0;
 	}
@@ -151,7 +152,58 @@ public class FirstPersonController : MonoBehaviour {
     gameObject.SendMessage("CanShoot");
   }
 
+  //Communication with MoveTarget.cs
   public bool getGameIsPaused() {
     return gameIsPaused;
+  }
+
+  public bool getStopTargets() {
+    return stopTargets;
+  }
+
+  //Power-ups
+
+  public void IncreaseTime() {
+    remainingTime += 15;
+  }
+
+  public void ActivateCrosshair() {
+    crosshair.GetComponent<MeshRenderer>().enabled = true;
+  }
+
+  public void StopTargets() {
+    stopTargets = true;
+    StartCoroutine("StopTargetsCooldown");
+  }
+
+  public void MoreAmmunition() {
+    MoreBullets(5);
+  }
+
+  public void MoreSpeed() {
+    movementSpeed *= 2;
+    StartCoroutine("MoreSpeedCooldown");
+  }
+
+  public IEnumerator MoreSpeedCooldown() {
+    yield return new WaitForSeconds(10.0f);
+    movementSpeed = movementSpeed/2;
+  }
+
+  public IEnumerator StopTargetsCooldown() {
+    yield return new WaitForSeconds(10.0f);
+    stopTargets = false;
+  }
+
+  public void OnTriggerEnter(Collider c) {
+    switch(c.tag) {
+      case "IncreaseTime": IncreaseTime(); Destroy(c.transform.parent.gameObject); break;
+      case "ActivateCrosshair": ActivateCrosshair(); Destroy(c.transform.parent.gameObject); break;
+      case "StopTargets": StopTargets(); Destroy(c.transform.parent.gameObject); break;
+      case "MoreAmmunition": MoreAmmunition(); Destroy(c.transform.parent.gameObject); break;
+      case "MoreSpeed": MoreSpeed(); Destroy(c.transform.parent.gameObject); break;
+
+      default: break;
+    }
   }
 }

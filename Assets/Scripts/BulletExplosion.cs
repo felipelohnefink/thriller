@@ -30,7 +30,7 @@ public class BulletExplosion : MonoBehaviour {
 			collision.gameObject.GetComponent<MeshRenderer>().enabled = false;
 			collision.gameObject.GetComponent<AudioSource>().Play();
 			player.SendMessage("MakePoint");
-			player.SendMessage("MoreBullets");
+			player.SendMessage("MoreBullets", 3);
 		}
 	}
 

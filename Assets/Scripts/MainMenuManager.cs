@@ -29,7 +29,6 @@ public class MainMenuManager : MonoBehaviour {
       levelMenu.SetActive(true);
     else
       levelMenu.SetActive(false);
-    //SceneManager.LoadScene("level01");
   }
 
   public void QuitGame() {
