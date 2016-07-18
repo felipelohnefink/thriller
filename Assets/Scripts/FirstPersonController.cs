@@ -26,6 +26,7 @@ public class FirstPersonController : MonoBehaviour {
     public Text bulletsText;
     public GameObject gameOverMenu;
     public GameObject crosshair;
+    public GameObject nextLevel;
 
     private bool gameIsPaused;
   private bool stopTargets;
@@ -109,7 +110,7 @@ public class FirstPersonController : MonoBehaviour {
 			gameObject.SendMessage("CannotShoot");
 			pointsText.text = "Points: " + currentPoints + "/" + maxPoints;
 			crosshair.GetComponent<MeshRenderer>().enabled = false;
-            GameOver();
+      GameOver();
 		}
 
 		//Player looses if runs out of time or bullets
@@ -136,13 +137,15 @@ public class FirstPersonController : MonoBehaviour {
 	}
 
   private void GameOver() {
-    
     Cursor.visible = true;
     Cursor.lockState = CursorLockMode.None;
     gameOverMenu.SetActive(true);
     if(gameIsPaused)
       GameObject.Find("Game Over").GetComponent<Text>().text = "Paused";
     GameObject.Find("Score").GetComponent<Text>().text = "Score: " + currentPoints + "/" + maxPoints;
+    if(currentPoints == maxPoints) {
+      nextLevel.SetActive(true);
+    }
   }
 
   public void Resume() {

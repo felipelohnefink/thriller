@@ -23,7 +23,8 @@ public class MoveTarget : MonoBehaviour {
 		  targetSpeed += targetAcceleration;
       gameObject.GetComponent<Renderer>().material.color = Color.red;
     } else
-      gameObject.GetComponent<Renderer>().material.color = Color.blue;
+      if(stopTargets.getStopTargets())
+        gameObject.GetComponent<Renderer>().material.color = Color.blue;
 
     if(stopTargets.getGameIsPaused() || stopTargets.getStopTargets())
       ableToMove = false;

@@ -21,4 +21,9 @@ public class GameOverMenu : MonoBehaviour {
   public void MainMenu() {
     SceneManager.LoadScene("MainMenu");
   }
+
+  public void NextLevel() {
+    int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+    SceneManager.LoadScene(nextScene);
+  }
 }
