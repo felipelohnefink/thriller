@@ -199,10 +199,10 @@ public class FirstPersonController : MonoBehaviour {
   public void OnTriggerEnter(Collider c) {
     switch(c.tag) {
       case "IncreaseTime": IncreaseTime(); PlaySoundAndDestroy(c); break;
-      case "ActivateCrosshair": ActivateCrosshair(); Destroy(c.transform.parent.gameObject); break;
-      case "StopTargets": StopTargets(); Destroy(c.transform.parent.gameObject); break;
-      case "MoreAmmunition": MoreAmmunition(); Destroy(c.transform.parent.gameObject); break;
-      case "MoreSpeed": MoreSpeed(); Destroy(c.transform.parent.gameObject); break;
+      case "ActivateCrosshair": ActivateCrosshair(); PlaySoundAndDestroy(c); break;
+      case "StopTargets": StopTargets(); PlaySoundAndDestroy(c); break;
+      case "MoreAmmunition": MoreAmmunition(); PlaySoundAndDestroy(c); break;
+      case "MoreSpeed": MoreSpeed(); PlaySoundAndDestroy(c); break;
 
       default: break;
     }
